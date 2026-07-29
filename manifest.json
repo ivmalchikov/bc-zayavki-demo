@@ -1,0 +1,33 @@
+{
+  "name": "Заявки Бизнес-центра на Вокзальной",
+  "short_name": "БЦ Заявки",
+  "description": "Приём и ведение сервисных заявок арендаторов Бизнес-центра на Вокзальной.",
+  "lang": "ru",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f0f2ef",
+  "theme_color": "#ff7900",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
