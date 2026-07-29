@@ -1,5 +1,7 @@
-// Простой офлайн-кэш для прототипа «Заявки БЦ на Вокзальной»
-var CACHE = 'bc-zayavki-v1';
+// Офлайн-кэш для прототипа «Заявки БЦ на Вокзальной»
+// Стратегия: network-first — свежая версия всегда в приоритете,
+// кэш используется только как запасной вариант при отсутствии сети.
+var CACHE = 'bc-zayavki-v2';
 var ASSETS = [
   './',
   './index.html',
@@ -26,13 +28,13 @@ self.addEventListener('activate', function (e) {
 self.addEventListener('fetch', function (e) {
   if (e.request.method !== 'GET') return;
   e.respondWith(
-    caches.match(e.request).then(function (cached) {
-      return cached || fetch(e.request).then(function (resp) {
-        var copy = resp.clone();
-        caches.open(CACHE).then(function (c) { c.put(e.request, copy); });
-        return resp;
-      }).catch(function () {
-        return caches.match('./index.html');
+    fetch(e.request).then(function (resp) {
+      var copy = resp.clone();
+      caches.open(CACHE).then(function (c) { c.put(e.request, copy); });
+      return resp;
+    }).catch(function () {
+      return caches.match(e.request).then(function (cached) {
+        return cached || caches.match('./index.html');
       });
     })
   );

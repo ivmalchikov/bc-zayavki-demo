@@ -1276,7 +1276,15 @@
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function(){
-    navigator.serviceWorker.register('sw.js').catch(function(e){ console.log('SW fail', e); });
+    navigator.serviceWorker.register('sw.js').then(function(reg){
+      reg.update();
+    }).catch(function(e){ console.log('SW fail', e); });
+  });
+  var reloadedOnce = false;
+  navigator.serviceWorker.addEventListener('controllerchange', function(){
+    if (reloadedOnce) return;
+    reloadedOnce = true;
+    window.location.reload();
   });
 }
 </script>
